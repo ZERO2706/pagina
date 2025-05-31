@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenido</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .welcome-card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            padding: 40px 30px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-card">
+        <h1 id="saludo"></h1>
+        <p>¡Has iniciado sesión correctamente!</p>
+        <button onclick="window.location.href='otra_pagina.html'">Ir a otra página</button>
+        <button onclick="ejecutarPython()">Ejecutar Python</button>
+        <div id="resultado"></div>
+    </div>
+    <script>
+        const usuario = localStorage.getItem('usuario');
+        document.getElementById('saludo').textContent = usuario 
+            ? `Bienvenido, ${usuario}!` 
+            : "Bienvenido!";
+
+        // Ejemplo de llamada a un endpoint Python (Flask/FastAPI)
+        function ejecutarPython() {
+            fetch('http://localhost:5000/carpeta_opti_alfin_PRIMERO', { // Cambia la URL según tu backend
+                method: 'GET'
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('resultado').textContent = "Resultado: " + data;
+            })
+            .catch(error => {
+                document.getElementById('resultado').textContent = "Error al ejecutar Python";
+            });
+        }
+    </script>
+</body>
+</html>
