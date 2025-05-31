@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .login-card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            padding: 40px 30px;
+            text-align: center;
+            width: 320px;
+        }
+        .login-card h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .login-card input[type="text"],
+        .login-card input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        .login-card button {
+            background: #74ebd5;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .login-card button:hover {
+            background: #4fc3f7;
+        }
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+        }
+        .success {
+            color: #27ae60;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm">
+            <input type="text" id="usuario" placeholder="Usuario" required><br>
+            <input type="password" id="contrasena" placeholder="Contraseña" required><br>
+            <button type="submit">Ingresar</button>
+        </form>
+        <div id="mensaje"></div>
+    </div>
+    <script>
+        // Usuario y contraseña de ejemplo
+        const usuarioValido = "admin";
+        const contrasenaValida = "1234";
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const usuario = document.getElementById('usuario').value;
+            const contrasena = document.getElementById('contrasena').value;
+            const mensaje = document.getElementById('mensaje');
+
+            if(usuario === usuarioValido && contrasena === contrasenaValida) {
+                mensaje.textContent = "¡Inicio de sesión exitoso!";
+                mensaje.className = "success";
+                localStorage.setItem('usuario', usuario); // Guarda el usuario
+                setTimeout(() => {
+                    window.location.href = "bienvenido.html"; // Redirige después de 1 segundo
+                }, 1000);
+            } else {
+                mensaje.textContent = "Usuario o contraseña incorrectos.";
+                mensaje.className = "error";
+            }
+        });
+    </script>
+</body>
+</html>
